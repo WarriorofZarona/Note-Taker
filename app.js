@@ -7,15 +7,13 @@ const PORT = 8080;
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-app.get("/notes", function (req, res) {
-    res.sendFile(path.join(__dirname, "public/notes.html"));
-});
+app.get("/notes", (req, res) => res.sendFile(path.join(__dirname, "public/notes.html")));
 
-app.get("*", function (req, res) {
-    res.sendFile(path.join(__dirname, "public/index.html"));
-});
+app.get("*", (req, res) => res.sendFile(path.join(__dirname, "public/index.html")));
 
+app.get("/api/notes", (req, res) => {
 
+})
 
 
 app.listen(PORT, function () {
