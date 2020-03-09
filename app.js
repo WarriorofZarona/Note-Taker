@@ -23,8 +23,6 @@ app.get("/api/notes", (req, res) => {
         }
     });
 
-    return db;
-
 })
 
 app.get("*", (req, res) => res.sendFile(path.join(__dirname, "public/index.html")));
