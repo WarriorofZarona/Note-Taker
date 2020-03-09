@@ -16,28 +16,32 @@ app.use(express.static(path.join(__dirname, 'public')));
 getJSON = () => {
 
     return readFileAsync("./db/db.json", "utf8").then(data => {
-        console.log(data);
         return JSON.parse(data);
     });
 
-}
+};
 
 app.get("/notes", (req, res) => res.sendFile(path.join(__dirname, "public/notes.html")));
 
 app.get("/api/notes", async (req, res) => {
 
-    const json = await getJSON();
-
-    res.json(json);
-
-
-
+    const noteArr = await getJSON();
+    res.json(noteArr);
 
 });
 
-app.post("api/notes", (req, res) => {
+app.post("/api/notes", async (req, res) => {
 
-
+    const noteArr = await getJSON();
+    const newNote = req.body;
+    noteArr.push(newNote);
+    console.log(noteArr);
+    const noteId = noteArr.map((note, index) => {
+        note.id = index
+        return note;
+    });
+    writeFileAsync("./db/db.json", JSON.stringify(noteId)).then(() => console.log("Successfully wrote to db.json!"))
+    return res.json(newNote);
 
 })
 
