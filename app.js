@@ -21,6 +21,13 @@ getJSON = () => {
 
 };
 
+mapId = (arr) => {
+    return arr.map((val, index) => {
+        val.id = index;
+        return val;
+    });
+}
+
 app.get("/notes", (req, res) => res.sendFile(path.join(__dirname, "public/notes.html")));
 
 app.get("/api/notes", async (req, res) => {
@@ -35,15 +42,12 @@ app.post("/api/notes", async (req, res) => {
     const noteArr = await getJSON();
     const newNote = req.body;
     noteArr.push(newNote);
-    console.log(noteArr);
-    const noteId = noteArr.map((note, index) => {
-        note.id = index
-        return note;
-    });
+    const noteId = mapId(noteArr);
     writeFileAsync("./db/db.json", JSON.stringify(noteId)).then(() => console.log("Successfully wrote to db.json!"))
     return res.json(newNote);
+});
 
-})
+// app.delete("/api/notes/:id")
 
 app.get("*", (req, res) => res.sendFile(path.join(__dirname, "public/index.html")));
 
