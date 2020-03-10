@@ -14,13 +14,20 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
 getJSON = () => { // reads the db.json file
-    return readFileAsync("./db/db.json", "utf8").then(data => {
-        return JSON.parse(data);
-    });
+    return readFileAsync("./db/db.json", "utf8")
+        .then(data => JSON.parse(data)
+            .catch(function (err) {
+                console.log(err);
+            })
+        );
 };
 
 writetoFile = notes => { //updates the db.json file
-    writeFileAsync("./db/db.json", JSON.stringify(notes)).then(() => console.log("Successfully wrote to db.json!"))
+    writeFileAsync("./db/db.json", JSON.stringify(notes))
+        .then(() => console.log("Successfully wrote to db.json!"))
+        .catch(function (err) {
+            console.log(err);
+        });
 };
 
 mapId = (arr) => { //maps an ID based on index + 1
