@@ -25,12 +25,12 @@ writetoFile = notes => { //updates the db.json file
 
 mapId = (arr) => { //maps an ID based on index
     return arr.map((val, index) => {
-        val.id = index + 1;
+        val.id = index + 1; //First note in array will have ID of 1 and so on
         return val;
     });
 }
 
-app.get("/notes", (req, res) => res.sendFile(path.join(__dirname, "public/notes.html")));
+app.get("/notes", (req, res) => res.sendFile(path.join(__dirname, "docs/notes.html")));
 
 app.get("/api/notes", async (req, res) => {
 
@@ -56,9 +56,7 @@ app.delete("/api/notes/:id", async (req, res) => {
 
     for (let i = 0; i < noteArr.length; i++) {
         if (deleteId == noteArr[i].id) {
-
             noteArr.splice(i, 1);
-
         };
     }
     mapId(noteArr);
