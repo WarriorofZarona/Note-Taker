@@ -14,12 +14,10 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
 getJSON = () => { // reads the db.json file
-    return readFileAsync("./db/db.json", "utf8")
-        .then(data => JSON.parse(data)
-            .catch(function (err) {
-                console.log(err);
-            })
-        );
+    return readFileAsync("./db/db.json", "utf8").then(data => JSON.parse(data))
+        .catch(function (err) {
+            console.log(err);
+        });
 };
 
 writetoFile = notes => { //updates the db.json file
