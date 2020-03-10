@@ -65,7 +65,6 @@ app.delete("/api/notes/:id", async (req, res) => {
             noteArr.splice(i, 1);
         };
     };
-    mapId(noteArr);
     writetoFile(noteArr);
     res.send(200);
 });
