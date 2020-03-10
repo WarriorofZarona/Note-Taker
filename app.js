@@ -21,14 +21,14 @@ getJSON = () => { // reads the db.json file
 
 writetoFile = notes => { //updates the db.json file
     writeFileAsync("./db/db.json", JSON.stringify(notes)).then(() => console.log("Successfully wrote to db.json!"))
-}
+};
 
-mapId = (arr) => { //maps an ID based on index
+mapId = (arr) => { //maps an ID based on index + 1
     return arr.map((val, index) => {
         val.id = index + 1; //First note in array will have ID of 1 and so on
         return val;
     });
-}
+};
 
 app.get("/notes", (req, res) => res.sendFile(path.join(__dirname, "public/notes.html")));
 
@@ -47,6 +47,7 @@ app.post("/api/notes", async (req, res) => {
     const noteId = mapId(noteArr);
     writetoFile(noteArr);
     return res.json(newNote);
+
 });
 
 app.delete("/api/notes/:id", async (req, res) => {
@@ -58,11 +59,11 @@ app.delete("/api/notes/:id", async (req, res) => {
         if (deleteId == noteArr[i].id) {
             noteArr.splice(i, 1);
         };
-    }
+    };
     mapId(noteArr);
     writetoFile(noteArr);
-    res.json(noteArr);
-})
+    res.send(200);
+});
 
 app.get("*", (req, res) => res.sendFile(path.join(__dirname, "public/index.html")));
 
