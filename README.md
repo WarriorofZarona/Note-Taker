@@ -15,7 +15,7 @@ Given a front end code, create back end code using express and connect it to the
 npm install, mainly express, path
 
 # Usage
-Learning to connect back end code and routing html and api with express
+User can type in notes and save them, retrieve them in a list when clicked, and delete when a button is clicked.
 
 # License
 No licenses
