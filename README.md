@@ -1,7 +1,7 @@
 
 # Note Taker ![GitHub package.json version](https://img.shields.io/github/package-json/v/WarriorofZarona/Good-README-Generator)
 
-![Note Taker](/.Note-Taker.png)
+![Note Taker](/Note-Taker.png)
 
 Given a front end code, create back end code using express and connect it to the front end
 
